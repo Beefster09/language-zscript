@@ -27,7 +27,7 @@
     'name': 'keyword.script.zscript'
   }
   {
-    'match': '\\b(int|float|bool|ffc|[el]weapon|item|npc)\\b'
+    'match': '\\b(int|float|bool|ffc|[el]weapon|item|npc|void)\\b'
     'name': 'keyword.type.zscript'
   }
   {
