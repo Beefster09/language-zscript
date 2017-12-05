@@ -7,13 +7,7 @@
   'z'
   'zh'
 ]
-'foldingStartMarker': '\{\s*$'
-'foldingStopMarker': '^\s*\}'
 'patterns': [
-  {
-    'match': '//.*$'
-    'name': 'comment'
-  }
   {
     'match': '\\b(import|const)\\b'
     'name': 'keyword.directive.zscript'
@@ -27,20 +21,32 @@
     'name': 'keyword.script.zscript'
   }
   {
-    'match': '\\b(int|float|bool|ffc|[el]weapon|item|npc|void)\\b'
-    'name': 'keyword.type.zscript'
+    'match': '\\b(int|float|bool|ffc|[el]weapon|item(data)?|npc|void)\\b'
+    'name': 'storage.type.var.zscript'
   }
   {
     'match': '\\b(true|false)\\b'
-    'name': 'constant.boolean.zscript'
+    'name': 'constant.language.boolean.$1.zscript'
   }
   {
     'match': '\\bnull\\b'
-    'name': 'constant.pointer.zscript'
+    'name': 'constant.language.null.zscript'
+  }
+  {
+    'match': '\\b(Abs|(Arc|Radian)?(Cos|Sin|Tan)|Factorial|(Inv)?Pow|Ln|Log10|Max|Min|Rand|Sqrt)\\b'
+    'name': 'support.function.math.zscript'
+  }
+  {
+    'match': '\\b(ClearTile|ClearTrace|CopyTile|SwapTile)\\b'
+    'name': 'support.function.data.zscript'
   }
   {
     'match': '\\b(Quit|Waitframe|Waitdraw)\\b'
     'name': 'support.function.control.zscript'
+  }
+  {
+    'match': '\\b(SizeOfArray|Trace(B|NL|S|ToBase)?)\\b'
+    'name': 'support.function.zscript'
   }
   {
     'match': '\\b(Screen|Link|Game)\\b'
@@ -52,6 +58,18 @@
   #   'end': ''
   # }
   {
+    'match': ';'
+    'name': 'punctuation.terminator.statement.js'
+  }
+  {
+    'match': ','
+    'name': 'meta.delimiter.object.comma.zscript'
+  }
+  {
+    'match': '->'
+    'name': 'meta.delimiter.method.arrow.js'
+  }
+  {
     'include': '#numbers'
   }
   {
@@ -59,6 +77,47 @@
   }
   {
     'include': '#strings'
+  }
+  {
+    'begin': '{'
+    'beginCaptures':
+      '0':
+        'name': 'meta.brace.curly.zscript'
+    'end': '}'
+    'endCaptures':
+      '0':
+        'name': 'meta.brace.curly.zscript'
+    'patterns': [
+      {
+        'include': '$self'
+      }
+    ]
+  }
+  {
+    'begin': '\\('
+    'beginCaptures':
+      '0':
+        'name': 'meta.brace.round.zscript'
+    'end': '\\)'
+    'endCaptures':
+      '0':
+        'name': 'meta.brace.round.zscript'
+    'patterns': [
+      {
+        'include': '$self'
+      }
+    ]
+  }
+  {
+    'match': '\\[|\\]'
+    'name': 'meta.brace.square.zscript'
+  }
+  {
+    'include': '#comments'
+  }
+  {
+    'match': '^\\s+'
+    'name': 'meta.indentation.zscript'
   }
 ]
 'repository':
@@ -120,10 +179,6 @@
         'name': 'keyword.operator.assignment.zscript'
       }
       {
-        'match': '->'
-        'name': 'keyword.operator.arrow.zscript'
-      }
-      {
         'match': '--'
         'name': 'keyword.operator.decrement.zscript'
       }
@@ -162,6 +217,36 @@
   'string_escapes':
     'patterns': [
       {
-        'match': '\\[0n]'
+        'match': '\\[0n\'"]'
+        'name': 'constant.character.escape.zscript'
+      }
+    ]
+  'function_body':
+    'patterns': [
+      {
+        'begin': '{'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.function.body.begin.bracket.curly.zscript'
+        'end': '}'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.function.body.end.bracket.curly.zscript'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+      }
+    ]
+  'comments':
+    'patterns': [
+      {
+        'begin': '//'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.comment.zscript'
+        'end': '$'
+        'name': 'comment.line.double-slash.zscript'
       }
     ]
