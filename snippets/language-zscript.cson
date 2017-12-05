@@ -1,7 +1,13 @@
 # If you want some example snippets, check out:
 # https://github.com/atom/language-gfm/blob/master/snippets/gfm.cson
 
-'.source.zscript':
-  'Method documentation':
-    'prefix': 'doc'
-    'body': '@@ ${1:method} - ${2:description}'
+'.z, .zh':
+  'global script {...}':
+    'prefix': 'gscript'
+    'body': 'global script $1 {\n\tvoid run($2) {\n\t$3\n\t}\n}'
+  'item script {...}':
+    'prefix': 'iscript'
+    'body': 'item script $1 {\n\tvoid run($2) {\n\t$3\n\t}\n}'
+  'ffc script {...}':
+    'prefix': 'fscript'
+    'body': 'ffc script $1 {\n\tvoid run($2) {\n\t$3\n\t}\n}'

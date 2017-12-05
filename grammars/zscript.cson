@@ -14,4 +14,154 @@
     'match': '//.*$'
     'name': 'comment'
   }
+  {
+    'match': '\\b(import|const)\\b'
+    'name': 'keyword.directive.zscript'
+  }
+  {
+    'match': '\\b(if|else|while|for|break|continue|do|return)\\b'
+    'name': 'keyword.control.zscript'
+  }
+  {
+    'match': '\\b(global|script|item|ffc)\\b'
+    'name': 'keyword.script.zscript'
+  }
+  {
+    'match': '\\b(int|float|bool|ffc|[el]weapon|item|npc)\\b'
+    'name': 'keyword.type.zscript'
+  }
+  {
+    'match': '\\b(true|false)\\b'
+    'name': 'constant.boolean.zscript'
+  }
+  {
+    'match': '\\bnull\\b'
+    'name': 'constant.pointer.zscript'
+  }
+  {
+    'match': '\\b(Quit|Waitframe|Waitdraw)\\b'
+    'name': 'support.function.control.zscript'
+  }
+  {
+    'match': '\\b(Screen|Link|Game)\\b'
+    'name': 'support.namespace.zscript'
+  }
+  # TODO: scrape from zscript.txt
+  # {
+  #   'begin': '\\bLink\\s*->\\s*'
+  #   'end': ''
+  # }
+  {
+    'include': '#numbers'
+  }
+  {
+    'include': '#operators'
+  }
+  {
+    'include': '#strings'
+  }
 ]
+'repository':
+  'numbers':
+    'patterns': [
+      {
+        'match': '\\b0(x|X)[0-9a-fA-F]+\\b'
+        'name': 'constant.numeric.hex.zscript'
+      }
+      {
+        'match': '\\b0(b|B)[01]+\\b'
+        'name': 'constant.numeric.binary.zscript'
+      }
+      {
+        'match': '\\b0(o|O)?[0-7]+\\b'
+        'name': 'constant.numeric.octal.zscript'
+      }
+      {
+        'match': '\\b\\d+\\b'
+        'name': 'constant.numeric.decimal.zscript'
+      }
+      {
+        'match': '\\b\\d+\\.\\d+\\b'
+        'name': 'constant.numeric.float.zscript'
+      }
+    ]
+  'operators':
+    'patterns': [
+      {
+        'match': '(%|\\+|-|\\*|%)='
+        'name': 'keyword.operator.assignment.compound.zscript'
+      }
+      {
+        'match': '(&|\\^|<<|>>|\\|)='
+        'name': 'keyword.operator.assignment.compound.bitwise.zscript'
+      }
+      {
+        'match': '(&&|^^|\\|\\|)='
+        'name': 'keyword.operator.assignment.compound.logical.zscript'
+      }
+      {
+        'match': '<<|>>'
+        'name': 'keyword.operator.bitwise.shift.zscript'
+      }
+      {
+        'match': '!=|<=|>=|==|<|>'
+        'name': 'keyword.operator.comparison.zscript'
+      }
+      {
+        'match': '&&|^^|!|\\|\\|'
+        'name': 'keyword.operator.logical.zscript'
+      }
+      {
+        'match': '&|\\||\\^|~'
+        'name': 'keyword.operator.bitwise.zscript'
+      }
+      {
+        'match': '='
+        'name': 'keyword.operator.assignment.zscript'
+      }
+      {
+        'match': '->'
+        'name': 'keyword.operator.arrow.zscript'
+      }
+      {
+        'match': '--'
+        'name': 'keyword.operator.decrement.zscript'
+      }
+      {
+        'match': '\\+\\+'
+        'name': 'keyword.operator.increment.zscript'
+      }
+      {
+        'match': '%|\\*|/|-|\\+'
+        'name': 'keyword.operator.arithmetic.zscript'
+      }
+    ]
+  'strings':
+    'patterns': [
+      {
+        'begin': '"'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.zscript'
+        'end': '"'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.zscript'
+        'name': 'string.quoted.double.zscript'
+        'patterns': [
+          {
+            'include': '#string_escapes'
+          }
+          {
+            'match': '[^"]*[^\\n\\r"\\\\]$'
+            'name': 'invalid.illegal.string.szcript'
+          }
+        ]
+      }
+    ]
+  'string_escapes':
+    'patterns': [
+      {
+        'match': '\\[0n]'
+      }
+    ]
