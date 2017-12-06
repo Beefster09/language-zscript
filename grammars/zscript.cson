@@ -146,7 +146,7 @@
       |(TriggerSecrets|Layer(?:Map|Screen)|isSolid) #5
       |(Num(?:Item|[LE]Weapon|NPC)s|(?:Load|Create)(?:Item|[LE]Weapon|NPC|)|ClearSprites) #6
       |(
-        Rectangle|Circle|Arc|Ellipse|Spline|Line|PutPixel|DrawTile|(?:Draw|Fast)Combo
+        Rectangle|Circle|Arc|Ellipse|Spline|Line|PutPixel|(?:Draw|Fast)(?:Combo|Tile)
         |Draw(?:Character|Integer|String|Bitmap|Layer|Screen)|Quad|Triangle(?:3D)?
         |SetRenderTarget
         ) #7
