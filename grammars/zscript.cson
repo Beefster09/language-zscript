@@ -520,7 +520,7 @@
         'name': 'constant.numeric.hex.zscript'
       }
       {
-        'match': '\\b0(b|B)[01]+\\b'
+        'match': '\\b[01]+b\\b'
         'name': 'constant.numeric.binary.zscript'
       }
       {
