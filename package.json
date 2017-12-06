@@ -1,6 +1,6 @@
 {
   "name": "language-zscript",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Provides support for Zelda Classic ZScript",
   "keywords": [
     "language",
