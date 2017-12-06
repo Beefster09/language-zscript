@@ -39,7 +39,26 @@
       '2':
         'name': 'entity.name.function.zscript'
       '3':
-        'name': 'meta.function-params'
+        'name': 'meta.function-params.zscript'
+        'patterns': [
+          {
+            'begin': '\\b(int|float|bool|ffc|[el]weapon|item(?:data)?|npc)\\b'
+            'beginCaptures':
+              '1':
+                'name': 'storage.type.parameter.zscript'
+            'end': '$|(,)'
+            'endCaptures':
+              '1':
+                'name': 'meta.punctuation.comma.zscript'
+            'name': 'meta.function-param.zscript'
+            'patterns': [
+              {
+                'match': '\\b([A-Za-z_]\\w*)\\b'
+                'name': 'variable.parameter.zscript'
+              }
+            ]
+          }
+        ]
     'end': '}'
     'name': 'meta.function-definition'
     'contentName': 'meta.function-body'
@@ -447,6 +466,9 @@
     'name': 'meta.delimiter.method.arrow.js'
   }
   {
+    'include': '#comments'
+  }
+  {
     'include': '#numbers'
   }
   {
@@ -488,9 +510,6 @@
   {
     'match': '\\[|\\]'
     'name': 'meta.brace.square.zscript'
-  }
-  {
-    'include': '#comments'
   }
 ]
 'repository':
