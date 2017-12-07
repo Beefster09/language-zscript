@@ -45,7 +45,7 @@
             'begin': '\\b(int|float|bool|ffc|[el]weapon|item(?:data)?|npc)\\b'
             'beginCaptures':
               '1':
-                'name': 'storage.type.parameter.zscript'
+                'name': 'storage.type.var.zscript'
             'end': '$|(,)'
             'endCaptures':
               '1':
@@ -109,7 +109,7 @@
        ((?:Input|Press)(?:[ABLR]|(?:Axis)?(?:Up|Down|Left|Right)|Ex[1-4])) #1
       |(InputMouse[XYZB])                       #2
       |([XYZ]|Jump|(?:Hit)?Dir|Ladder[XY])      #3
-      |(Hit[XY]Offset|HitZHeight|CollDetection) #4
+      |(Hit[XY]Offset|HitWidth|HitHeight|HitZHeight|CollDetection) #4
       |(Invisible|Tile|Flip|Draw[XYZ]Offset)    #5
       |((?:Max)?[HM]P|Drunk|(?:Item|Sword)Jinx|Action|(?:Held)?Item|Equipment|Misc) #6
       |((?:Pit)?Warp|Select[AB]Weapon) #7
@@ -209,12 +209,21 @@
     'begin': '\\b(\\w+)\\s*->\\s*'
     'beginCaptures':
       '1':
-        'name': 'variable.other.object'
+        'patterns': [
+          {
+            'match': 'this'
+            'name': 'keyword.other.this.ffc.zscript'
+          }
+          {
+            'match': '.*'
+            'name': 'variable.other.object.zscript'
+          }
+        ]
     'end': '''(?x)(?:
        ([XYZ]|Jump|Dir|Step) #1
       |(Misc|ID|InitD|Damage) #2
-      |( (?:Original)?(?:Tile|CSet)|FlashCSet|Draw[XYZ]Offset|DrawStyle|Delay
-        |Tile(?:Width|Height)|NumFrames|Frame|ASpeed|Flash|Flip|Extend) #3
+      |( Tile(?:Width|Height)|(?:Original)?(?:Tile|CSet)|FlashCSet|Flash|Extend
+        |Draw[XYZ]Offset|DrawStyle|Delay|NumFrames|Frame|ASpeed|Flip) #3
       |(Hit[XY]Offset|HitZHeight|Hit(?:Width|Height)|CollDetection) #4
       |(Link|Script|Data|[AV][xy]|Effect(?:Width|Height)|Flags) #5 - ffc
       |(Pickup) #6 - items
@@ -223,7 +232,7 @@
       |(Attributes|Rate|Hunger|Haltrate|Homing|WeaponDamage|HP|ItemSet|BossPal|SFX|Defense|MiscFlags) #9 - npcs
       |(isValid|GetName) #10 methods
       |(\\S+) #11
-    )'''
+    )\\b'''
     'endCaptures':
       '1':
         'name': 'support.variable.object.position.zscript'
@@ -247,6 +256,10 @@
         'name': 'support.function.object.zscript'
       '11':
         'name': 'support.other.object.unknown.zscript'
+  }
+  {
+    'match': '\\bthis\\b'
+    'name': 'keyword.other.this.zscript'
   }
   {
     'match': '\\b(Screen|Link|Game)\\b'
@@ -452,6 +465,19 @@
       |strcspn|strlen|strncat|strncatf|strncmp|strncpy|strrchr|strspn|strstr|xlen|xtoa|xtoi
     )\\b'''
     'name': 'support.function.string.zscript'
+  }
+  {
+    'begin': '\\b(\\w+)\\s*\\('
+    'beginCaptures':
+      '1':
+        'name': 'entity.name.function.call.zscript'
+    'end': '\\)'
+    'name': 'meta.function-call.zscript'
+    'patterns': [
+      {
+        'include': '$self'
+      }
+    ]
   }
   {
     'match': ';'
